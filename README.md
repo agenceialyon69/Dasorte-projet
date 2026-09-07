@@ -75,7 +75,7 @@ Généré depuis une source HTML dédiée (non incluse dans ce dépôt de produc
 
 - `<title>`, meta description, canonical, Open Graph, Twitter Card, JSON-LD `Person` (uniquement des champs vérifiés — pas d'`award`, pas d'`alumniOf` inventés).
 - `robots.txt` + `sitemap.xml` inclus.
-- **À faire après déploiement** : remplacer `https://www.adrianadasorte.com/` (placeholder) par le vrai domaine dans `index.html` (canonical, OG, JSON-LD), `robots.txt` et `sitemap.xml`.
+- URLs actuellement réglées sur `https://dasorte-projet.vercel.app/` (domaine réel de déploiement). **Si un nom de domaine personnalisé est connecté plus tard** (ex : adrianadasorte.com), remplacer cette URL dans `index.html` (canonical, OG, JSON-LD), `robots.txt` et `sitemap.xml`.
 
 ## 9. Déploiement
 
@@ -102,7 +102,8 @@ Recommandation : [Plausible](https://plausible.io) ou [Vercel Analytics](https:/
 
 ## 12. Checklist avant mise en ligne
 
-- [ ] Remplacer le domaine placeholder (`adrianadasorte.com`) partout où il apparaît, une fois le vrai domaine choisi et acheté
+- [x] Site déployé et en ligne : https://dasorte-projet.vercel.app/
+- [ ] Connecter un nom de domaine personnalisé si souhaité (Vercel → Project Settings → Domains), puis mettre à jour les URLs SEO (§8)
 - [ ] Connecter le formulaire à Formspree (ou équivalent) — voir §5
 - [ ] Renseigner les mensurations réelles ou décider de ne pas les publier
 - [ ] Ajouter une vraie adresse email de contact

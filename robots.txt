@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.adrianadasorte.com/sitemap.xml
+Sitemap: https://dasorte-projet.vercel.app/sitemap.xml
