@@ -14,20 +14,29 @@ Si le projet évolue vers un vrai CMS (Adriana doit changer ses photos elle-mêm
 
 ## 2. Structure du projet
 
+Site **multi-pages** : chaque section a sa propre URL, son propre `<title>`/meta SEO, et est référençable/partageable individuellement.
+
 ```
 /
-├── index.html              — page principale (hero, work, profile, services, comp card, book)
+├── index.html              — accueil (hero, teasers work/profile/services, CTA comp card + book)
+├── portfolio.html           — Work : galerie complète avec filtres + lightbox
+├── about.html                — Profile : bio complète + "Adriana Code"
+├── services.html              — Services : Model / Stylist / Content Creator
+├── comp-card.html              — Comp Card digitale + téléchargement PDF + showreel
+├── book.html                    — formulaire de booking complet
 ├── 404.html                 — page d'erreur éditoriale
 ├── legal.html                — mentions légales / confidentialité (placeholders à compléter)
 ├── robots.txt
 ├── sitemap.xml
 ├── assets/
 │   ├── css/style.css        — design system complet (tokens, composants)
-│   ├── js/main.js           — nav mobile, reveal au scroll, filtres galerie, lightbox, validation formulaire
+│   ├── js/main.js           — nav mobile, reveal au scroll, filtres galerie, lightbox, validation formulaire (chaque bloc est gardé par une vérification d'existence de l'élément, pour rester sûr sur une page qui n'a pas telle ou telle section)
 │   ├── img/                 — photos (16 clichés curatés + og-cover.jpg)
 │   └── pdf/comp-card.pdf    — comp card téléchargeable (recto/verso)
 └── README.md
 ```
+
+Nav, menu mobile et footer sont dupliqués sur chaque page HTML (pas de moteur de template côté serveur — cohérent avec le choix "site statique", voir §1). **Si vous modifiez le nav ou le footer, il faut répercuter le changement à la main sur les 6 fichiers `.html`.**
 
 ## 3. Design system (résumé — voir `assets/css/style.css` pour les tokens complets)
 
@@ -54,7 +63,7 @@ Le formulaire (`#book`) est validé côté client (champs requis, format email, 
 **Pour l'activer (5 minutes)** :
 1. Créer un compte sur [formspree.io](https://formspree.io) (gratuit jusqu'à 50 soumissions/mois).
 2. Créer un formulaire, récupérer l'ID fourni (`xxxxxxxx`).
-3. Dans `index.html`, remplacer `YOUR_FORM_ID` dans l'attribut `action` du `<form id="bookForm">` par cet ID.
+3. Dans `book.html`, remplacer `YOUR_FORM_ID` dans l'attribut `action` du `<form id="bookForm">` par cet ID.
 4. Tester un envoi réel.
 
 Alternative : brancher n'importe quel autre service (Basin, Getform, ou une fonction serverless Vercel si le projet passe à un vrai backend).
@@ -75,7 +84,8 @@ Généré depuis une source HTML dédiée (non incluse dans ce dépôt de produc
 
 - `<title>`, meta description, canonical, Open Graph, Twitter Card, JSON-LD `Person` (uniquement des champs vérifiés — pas d'`award`, pas d'`alumniOf` inventés).
 - `robots.txt` + `sitemap.xml` inclus.
-- URLs actuellement réglées sur `https://dasorte-projet.vercel.app/` (domaine réel de déploiement). **Si un nom de domaine personnalisé est connecté plus tard** (ex : adrianadasorte.com), remplacer cette URL dans `index.html` (canonical, OG, JSON-LD), `robots.txt` et `sitemap.xml`.
+- URLs actuellement réglées sur `https://dasorte-projet.vercel.app/` (domaine réel de déploiement). **Si un nom de domaine personnalisé est connecté plus tard** (ex : adrianadasorte.com), remplacer cette URL dans les 6 pages `.html` (canonical, OG, JSON-LD), `robots.txt` et `sitemap.xml`.
+- `sitemap.xml` liste les 6 pages individuellement (accueil, portfolio, profile, services, comp-card, book).
 
 ## 9. Déploiement
 
@@ -96,9 +106,9 @@ Recommandation : [Plausible](https://plausible.io) ou [Vercel Analytics](https:/
 
 ## 11. Maintenance courante (sans compétence technique)
 
-- **Changer une photo** : remplacer le fichier correspondant dans `assets/img/` en gardant le même nom, ou éditer `index.html` pour pointer vers un nouveau fichier.
-- **Modifier un texte** : ouvrir `index.html`, chercher le texte à changer (Ctrl+F), l'éditer directement — c'est du texte brut dans des balises HTML.
-- **Ajouter un lien de contact** : dans `index.html`, section `#book` et footer, dupliquer une ligne `<a class="contact-link" href="...">`.
+- **Changer une photo** : remplacer le fichier correspondant dans `assets/img/` en gardant le même nom, ou éditer la page concernée pour pointer vers un nouveau fichier.
+- **Modifier un texte** : ouvrir la page concernée (`index.html`, `portfolio.html`, `about.html`, `services.html`, `comp-card.html` ou `book.html`), chercher le texte à changer (Ctrl+F), l'éditer directement — c'est du texte brut dans des balises HTML.
+- **Ajouter un lien de contact** : dans `book.html` et dans le footer (dupliqué sur chaque page), ajouter une ligne `<a href="...">`.
 
 ## 12. Checklist avant mise en ligne
 
@@ -115,6 +125,7 @@ Recommandation : [Plausible](https://plausible.io) ou [Vercel Analytics](https:/
 
 ## 13. Ce qui n'a volontairement pas été fait
 
-- Pas de multi-page réel (`/work`, `/profile`, etc. séparés) : le site est une page unique avec ancres, choix pragmatique pour un portfolio de cette taille. Migration possible plus tard en scindant `index.html` par section, en réutilisant le même `style.css`.
 - Pas de CMS : aucune donnée à faire persister ne le justifiait à ce stade.
-- Pas de "Selected Collaborations" : aucune collaboration de marque vérifiée fournie — voir §4.
+- Pas de "Selected Collaborations" : aucune collaboration de marque vérifiée fournie — voir §4. À ajouter dès que de vraies collaborations sont confirmées, jamais avant.
+- Pas de version anglaise (FR uniquement) : à envisager si l'objectif est de décrocher des collaborations hors marché francophone.
+- Pas de rate card / grille tarifaire sur la comp card : à ajouter quand la stratégie de prix sera définie.

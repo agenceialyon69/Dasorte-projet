@@ -63,6 +63,8 @@
     transition:right .25s ease;
   }
   .nav-links a:not(.nav-cta):hover::after{ right:0; }
+  .nav-links a.active:not(.nav-cta)::after{ right:0; }
+  .nav-links a.active:not(.nav-cta){ color:var(--ink); }
   .nav-cta{
     background:var(--ink); color:var(--paper); padding:10px 20px;
     font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
@@ -109,6 +111,15 @@
     .hero-content{ padding:28px 24px 48px; }
     .hero-photo::after{ background:linear-gradient(0deg, rgba(10,10,10,.4) 0%, rgba(10,10,10,0) 14%); }
   }
+  /* ---------------- page head : banner for internal pages (portfolio, profile, services, comp-card, book) ---------------- */
+  .page-head{ padding:64px 0 40px; border-bottom:1px solid var(--warm-line); }
+  .page-head .eyebrow{ margin-bottom:14px; }
+  .page-head h1{ font-size:clamp(34px,5vw,58px); letter-spacing:-.01em; }
+  .page-head p{ margin-top:16px; max-width:56ch; color:var(--ink-soft); font-size:16px; }
+  .page-head .crumb{ font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:18px; display:block; }
+  .page-head .crumb a{ text-decoration:none; color:var(--ink-soft); }
+  .page-head .crumb a:hover{ color:var(--ink); }
+
   .btn{
     display:inline-flex; align-items:center; gap:8px; padding:15px 26px;
     font-size:12.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
@@ -153,6 +164,7 @@
   .about-grid p{ color:var(--ink-soft); font-size:17px; margin:0 0 20px; max-width:52ch; }
   .about-grid strong{ color:var(--ink); font-weight:700; }
   @media (max-width:860px){ .about-grid{ grid-template-columns:1fr; gap:40px; } }
+  .about-photo{ aspect-ratio:4/5; overflow:hidden; }
 
   .code-list{ margin-top:30px; border-top:1px solid var(--warm-line); }
   .code-row{ display:flex; align-items:baseline; gap:24px; padding:18px 0; border-bottom:1px solid var(--warm-line); }
@@ -194,6 +206,7 @@
     opacity:0; transition:opacity .25s; z-index:0;
   }
   .gallery figure:hover::before, .gallery figure:hover figcaption{ opacity:1; }
+  .stretched-link{ position:absolute; inset:0; z-index:2; }
   @media (max-width:900px){
     .gallery{ grid-template-columns:repeat(4,1fr); }
     .gallery figure{ grid-column:span 2 !important; aspect-ratio:3/4 !important; }
@@ -223,6 +236,18 @@
   .service .brings b{ display:block; color:var(--ink); font-weight:700; letter-spacing:.08em; text-transform:uppercase; font-size:10.5px; margin-bottom:8px; }
   .service a.svc-cta{ margin-top:auto; font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; text-decoration:none; border-bottom:1px solid var(--ink); padding-bottom:2px; align-self:flex-start; }
   @media (max-width:860px){ .services{ grid-template-columns:1fr; } }
+
+  .link-arrow{ display:inline-block; margin-top:20px; font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; text-decoration:none; color:var(--ink); border-bottom:1px solid var(--ink); padding-bottom:2px; }
+  .sec-head .link-arrow{ margin-top:0; white-space:nowrap; }
+
+  /* ---------------- cta banner (home / services) ---------------- */
+  .cta-banner{
+    display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;
+    padding:48px; border:1px solid var(--warm-line); background:var(--paper-2);
+  }
+  .cta-banner-dark{ background:var(--ink); border-color:var(--ink); color:var(--dark-paper); }
+  .cta-banner-dark .eyebrow{ color:var(--dark-soft); }
+  @media (max-width:640px){ .cta-banner{ padding:32px 24px; } }
 
   /* ---------------- comp card ---------------- */
   .compcard{ display:grid; grid-template-columns:0.85fr 1.15fr; gap:0; border:1px solid var(--warm-line); }
